@@ -5,6 +5,18 @@ namespace SimaticLibrary
 {
     public class SimaticString
     {
+        private byte[] array;
+
+        private enum Index
+        {
+            MaxLength,
+            Length,
+            Offset
+        }
+
+        private const int MAX_LENGTH = 254;
+        private const int PADDING = 2;
+
         public SimaticString(int maxLength = MAX_LENGTH)
         {
             if (maxLength > MAX_LENGTH)
@@ -72,18 +84,6 @@ namespace SimaticLibrary
         {
             return this.array;
         }
-
-        private byte[] array;
-
-        private enum Index
-        {
-            MaxLength,
-            Length,
-            Offset
-        }
-
-        private const int MAX_LENGTH = 254;
-        private const int PADDING = 2;
 
         private string EncodeSpecialCharacters(string s)
         {
