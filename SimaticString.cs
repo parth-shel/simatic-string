@@ -44,7 +44,7 @@ namespace SimaticLibrary
 
         public void Set(string s)
         {
-            this.Set(Encoding.ASCII.GetBytes(s));
+            this.Set(Encoding.ASCII.GetBytes(EncodeSpecialCharacters(s)));
         }
 
         public void Set(SimaticString s)
@@ -65,7 +65,7 @@ namespace SimaticLibrary
 
         public override string ToString()
         {
-            return Encoding.ASCII.GetString(this.array, (int)Index.Offset, this.Length);
+            return DecodeSpecialCharacters(Encoding.ASCII.GetString(this.array, (int)Index.Offset, this.Length));
         }
 
         public byte[] GetBytes()
@@ -80,6 +80,18 @@ namespace SimaticLibrary
             MaxLength,
             Length,
             Offset
+        }
+
+        private string EncodeSpecialCharacters(string s)
+        {
+            // TODO: implement special character handling
+            return s;
+        }
+
+        private string DecodeSpecialCharacters(string s)
+        {
+            // TODO: implement special character handling
+            return s;
         }
     }
 }
