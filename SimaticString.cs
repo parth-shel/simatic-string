@@ -5,14 +5,14 @@ namespace SimaticLibrary
 {
     public class SimaticString
     {
-        public SimaticString(int maxLength = 254)
+        public SimaticString(int maxLength = MAX_LENGTH)
         {
-            if (maxLength > 254)
+            if (maxLength > MAX_LENGTH)
             {
                 throw new Exception("simatic string length overflow");
             }
 
-            this.array = new byte[maxLength + 2];
+            this.array = new byte[maxLength + PADDING];
             this.array[(int)Index.MaxLength] = Convert.ToByte(maxLength);
             this.array[(int)Index.Length] = Convert.ToByte(0);
 
@@ -22,7 +22,7 @@ namespace SimaticLibrary
 
         public SimaticString(SimaticString s)
         {
-            this.array = new byte[s.MaxLength + 2];
+            this.array = new byte[s.MaxLength + PADDING];
             s.array.CopyTo(this.array, 0);
 
             this.MaxLength = s.MaxLength;
@@ -81,6 +81,9 @@ namespace SimaticLibrary
             Length,
             Offset
         }
+
+        private const int MAX_LENGTH = 254;
+        private const int PADDING = 2;
 
         private string EncodeSpecialCharacters(string s)
         {
