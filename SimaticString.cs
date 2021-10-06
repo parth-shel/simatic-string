@@ -14,6 +14,7 @@ namespace SimaticLibrary
             Offset
         }
 
+        // MAX_LENGTH + PADDING = 2^8
         private const int MAX_LENGTH = 254;
         private const int PADDING = 2;
 
