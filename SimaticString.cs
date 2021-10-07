@@ -172,6 +172,10 @@ namespace SimaticLibrary
                             }
                         }
                     }
+                    else
+                    {
+                        result.Append(ch);
+                    }
                 }
                 else
                 {
