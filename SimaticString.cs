@@ -88,14 +88,131 @@ namespace SimaticLibrary
 
         private string EncodeSpecialCharacters(string s)
         {
-            // TODO: implement special character handling
-            return s;
+            // special character handling
+            StringBuilder result = new StringBuilder(s.Length);
+            for (int i = 0; i < s.Length; i++)
+            {
+                char ch = s[i];
+
+                if (ch == '$')
+                {
+                    if (i+1 < s.Length)
+                    {
+                        char sc = s[i++];
+                        if (Char.IsDigit(sc))
+                        {
+                            // hex special character
+                            if (i+1 < s.Length)
+                            {
+                                string hex = sc.ToString() + s[i++].ToString();
+                                
+                                switch (hex)
+                                {
+                                    case "0A":
+                                        result.Append('\n');
+                                        break;
+                                    case "0C":
+                                        result.Append('\f');
+                                        break;
+                                    case "0D":
+                                        result.Append('\r');
+                                        break;
+                                    case "09":
+                                        result.Append('\t');
+                                        break;
+                                    case "24":
+                                        result.Append('$');
+                                        break;
+                                    case "27":
+                                        result.Append('\'');
+                                        break;
+                                    default:
+                                        result.Append(hex);
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                result.Append(sc);
+                            }
+                        }
+                        else
+                        {
+                            // letter special character
+                            switch (sc)
+                            {
+                                case 'L':
+                                case 'l':
+                                    result.Append('\n');
+                                    break;
+                                case 'N':
+                                    result.Append("\r\n");
+                                    break;
+                                case 'P':
+                                case 'p':
+                                    result.Append('\f');
+                                    break;
+                                case 'R':
+                                case 'r':
+                                    result.Append('\r');
+                                    break;
+                                case 'T':
+                                case 't':
+                                    result.Append('\t');
+                                    break;
+                                case '$':
+                                    result.Append('$');
+                                    break;
+                                case '\'':
+                                    result.Append('\'');
+                                    break;
+                                default:
+                                    result.Append(sc);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    result.Append(ch);
+                }
+            }
+            return result.ToString();
         }
 
         private string DecodeSpecialCharacters(string s)
         {
-            // TODO: implement special character handling
-            return s;
+            // special character handling
+            StringBuilder result = new StringBuilder(s.Length);
+            foreach (char ch in s)
+            {
+                switch (ch)
+                {
+                    case '\n':
+                        result.Append("$L");
+                        break;
+                    case '\f':
+                        result.Append("$P");
+                        break;
+                    case '\r':
+                        result.Append("$R");
+                        break;
+                    case '\t':
+                        result.Append("$T");
+                        break;
+                    case '$':
+                        result.Append("$$");
+                        break;
+                    case '\'':
+                        result.Append("$'");
+                        break;
+                    default:
+                        result.Append(ch);
+                        break;
+                }
+            }
+            return result.ToString();
         }
     }
 }
