@@ -20,7 +20,7 @@ namespace SimaticLibrary
 
         public SimaticString(int maxLength = MAX_LENGTH)
         {
-            if (maxLength > MAX_LENGTH)
+            if (maxLength > MAX_LENGTH || maxLength < 0)
             {
                 throw new Exception("simatic string length overflow");
             }
@@ -63,7 +63,7 @@ namespace SimaticLibrary
         public void Set(SimaticString s)
         {
             this.array[(int)Index.Length] = Convert.ToByte(s.Length);
-            s.array.CopyTo(this.array, (int)Index.Offset);
+            Array.Copy(s.array, (int)Index.Offset, this.array, (int)Index.Offset, s.Length);
 
             this.Length = s.Length;
         }
