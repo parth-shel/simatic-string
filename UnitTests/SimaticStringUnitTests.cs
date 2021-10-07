@@ -102,5 +102,18 @@ namespace UnitTests
 
             Assert.Equal("peedhsraH", ss.ToString());
         }
+
+        [Fact]
+        public void SpecialCharactersTest()
+        {
+            SimaticString ss = new SimaticString();
+            
+            ss.Set("$N");
+            Assert.Equal(2, ss.Length);
+            byte[] arr = ss.GetBytes();
+            Assert.Equal(Convert.ToByte('\r'), arr[2]);
+            Assert.Equal(Convert.ToByte('\n'), arr[3]);
+            Assert.Equal("$R$L", ss.ToString());
+        }
     }
 }

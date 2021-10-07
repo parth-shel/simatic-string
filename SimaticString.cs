@@ -98,13 +98,13 @@ namespace SimaticLibrary
                 {
                     if (i+1 < s.Length)
                     {
-                        char sc = s[i++];
+                        char sc = s[++i];
                         if (Char.IsDigit(sc))
                         {
                             // hex special character
                             if (i+1 < s.Length)
                             {
-                                string hex = sc.ToString() + s[i++].ToString();
+                                string hex = sc.ToString() + s[++i].ToString();
                                 
                                 switch (hex)
                                 {
