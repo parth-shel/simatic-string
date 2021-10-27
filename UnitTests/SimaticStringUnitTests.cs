@@ -83,7 +83,7 @@ namespace UnitTests
         public void ReverseTest()
         {
             SimaticString ss = new SimaticString();
-            ss.Set("Harshdeep");
+            ss.Set("Siemens");
 
             Assert.Equal(9, ss.Length);
 
@@ -91,7 +91,7 @@ namespace UnitTests
             Assert.Equal(Convert.ToByte(254) ,arr[0]);
             Assert.Equal(Convert.ToByte(9), arr[1]);
 
-            Assert.Equal("Harshdeep", ss.ToString());
+            Assert.Equal("Siemens", ss.ToString());
             ss.Reverse();
 
             arr = ss.GetBytes();
@@ -100,7 +100,7 @@ namespace UnitTests
 
             Assert.Equal(9, ss.Length);
 
-            Assert.Equal("peedhsraH", ss.ToString());
+            Assert.Equal("snemeiS", ss.ToString());
         }
 
         [Fact]
